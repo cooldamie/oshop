@@ -33,7 +33,8 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path:'', component: HomeComponent  },
+      { path: '', component: HomeComponent },
+      { path:'home', component: HomeComponent  },
       { path:'products', component: ProductsComponent  },
       { path:'shopping-cart', component: ShoppingCartComponent  },
       { path:'check-out', component: CheckOutComponent  },
