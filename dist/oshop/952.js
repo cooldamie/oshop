@@ -1,0 +1,1 @@
+(self.webpackChunkoshop=self.webpackChunkoshop||[]).push([[952],{1952:(s,e,h)=>{"use strict";h.r(e),h(6423)}}]);
