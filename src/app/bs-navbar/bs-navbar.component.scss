@@ -1,3 +1,13 @@
-.dropdown-toggle {
+.dropdown-toggle, .logout {
 cursor: pointer;
 }
+
+.glass {
+background: rgba( 203, 199, 199, 0.15 );
+box-shadow: 0 8px 32px 0 rgba(127, 127, 129, 0.07);
+backdrop-filter: blur( 12.0px );
+-webkit-backdrop-filter: blur( 12.0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+

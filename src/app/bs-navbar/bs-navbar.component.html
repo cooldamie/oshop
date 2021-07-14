@@ -1,36 +1,39 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 glass">
   <div class="container-fluid">
     <button type="button" class="btn btn-light navbar-brand d-inline text-md" routerLink="/">
-      <img src="https://img.icons8.com/material-rounded/36/000000/garage-closed.png"/> Dami's Shop</button>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <img src="https://img.icons8.com/material-rounded/36/000000/garage-closed.png" /> Dami's Shop</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="false"></i>  Cart </a>
+          <a class="nav-link" routerLink="/shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="false"></i> Cart
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+        <li *ngIf="auth.user$ | async as user; else anonUser " ngbDropdown class="nav-item d-inline-block">
+          <button type="button" class="btn dropdown-toggle nav-link btn-outline-light" id="dropdownBasic1"
+            ngbDropdownToggle>{{ user.displayName }}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
+            <a ngbDropdownItem routerLink="/admin/orders">Manage Orders</a>
+            <a ngbDropdownItem routerLink="/admin/products">Manage Products</a>
+            <a ngbDropdownItem class="logout" (click)="logout()">Log Out</a>
+          </div>
         </li>
+        <ng-template #anonUser>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+        </ng-template>
 
-        <li class="nav-item">
 
-            <div class="col">
-              <div ngbDropdown class="d-inline-block "  >
-                <button type="button"  class="btn dropdown-toggle nav-link btn-outline-light" id="dropdownBasic1" ngbDropdownToggle >Username</button>
-                <div ngbDropdownMenu  aria-labelledby="dropdownBasic1">
-                  <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
-                  <a ngbDropdownItem routerLink="/admin/orders">Manage Orders</a>
-                  <a ngbDropdownItem routerLink="/admin/products">Manage Products</a>
-                  <a ngbDropdownItem >Log Out</a>
-                </div>
-              </div>
-            </div>
-        </li>
+
       </ul>
 
     </div>
   </div>
+
 </nav>

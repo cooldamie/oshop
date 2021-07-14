@@ -1,3 +1,5 @@
+import { AuthGuard } from './authenthication/guard/auth-guard.service';
+import { AuthService } from './authenthication/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -15,6 +17,11 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 
 
 @NgModule({
@@ -34,23 +41,28 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path:'home', component: HomeComponent  },
       { path:'products', component: ProductsComponent  },
       { path:'shopping-cart', component: ShoppingCartComponent  },
-      { path:'check-out', component: CheckOutComponent  },
-      { path:'order-success', component: OrderSuccessComponent  },
+      { path:'check-out', component: CheckOutComponent, canActivate:[AuthGuard]  },
+      { path:'order-success', component: OrderSuccessComponent, canActivate:[AuthGuard]  },
       { path:'login', component: LoginComponent  },
-      { path:'admin/products', component: AdminProductsComponent  },
-      { path: 'admin/orders', component: AdminOrdersComponent },
-      { path:'my-orders', component: MyOrdersComponent  },
+      { path:'admin/products', component: AdminProductsComponent, canActivate:[AuthGuard]  },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate:[AuthGuard] },
+      { path:'my-orders', component: MyOrdersComponent, canActivate:[AuthGuard]  },
     ]),
     NgbModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers:
+    [AuthService,
+      AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

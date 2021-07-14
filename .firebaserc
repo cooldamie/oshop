@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "damioshop2"
+  },
+  "targets": {
+    "damioshop2": {
+      "hosting": {
+        "oshop": [
+          "damioshop2"
+        ]
+      }
+    }
   }
 }
